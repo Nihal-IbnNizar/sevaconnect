@@ -1,26 +1,229 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
+  --color-on-error-container: var(--on-error-container);
+
+  --font-headline: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --font-body: var(--font-hanken-grotesk), 'Hanken Grotesk', 'Inter', system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Obsidian Dark Palette (Default) */
+:root, .dark {
+  --surface: #0f131c;
+  --surface-dim: #0f131c;
+  --surface-bright: #353943;
+  --surface-container-lowest: #0a0e17;
+  --surface-container-low: #181b25;
+  --surface-container: #1c1f29;
+  --surface-container-high: #262a34;
+  --surface-container-highest: #31353f;
+
+  --primary: #ddb7ff;
+  --primary-container: #b76dff;
+  --primary-fixed: #f0dbff;
+  --primary-fixed-dim: #ddb7ff;
+  --on-primary: #490080;
+  --on-primary-container: #400071;
+  --on-primary-fixed: #2c0051;
+  --on-primary-fixed-variant: #6900b3;
+
+  --secondary: #4edea3;
+  --secondary-container: #00a572;
+  --secondary-fixed: #6ffbbe;
+  --secondary-fixed-dim: #4edea3;
+  --on-secondary: #003824;
+  --on-secondary-container: #00311f;
+  --on-secondary-fixed: #002113;
+  --on-secondary-fixed-variant: #005236;
+
+  --tertiary: #c0c1ff;
+  --tertiary-container: #8083ff;
+  --tertiary-fixed: #e1e0ff;
+  --tertiary-fixed-dim: #c0c1ff;
+  --on-tertiary: #1000a9;
+  --on-tertiary-container: #0d0096;
+  --on-tertiary-fixed: #07006c;
+  --on-tertiary-fixed-variant: #2f2ebe;
+
+  --on-surface: #dfe2ef;
+  --on-surface-variant: #cfc2d6;
+  --outline: #988d9f;
+  --outline-variant: #4d4354;
+
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error: #690005;
+  --on-error-container: #ffdad6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Crisp Light Mode Matrix */
+html:not(.dark) {
+  --surface: #f8fafc;
+  --surface-dim: #edeef2;
+  --surface-bright: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f1f4f9;
+  --surface-container: #e8ecf4;
+  --surface-container-high: #dde3ee;
+  --surface-container-highest: #d2d9e6;
+
+  --primary: #7928ca;
+  --primary-container: #9333ea;
+  --primary-fixed: #f3e8ff;
+  --primary-fixed-dim: #d8b4fe;
+  --on-primary: #ffffff;
+  --on-primary-container: #ffffff;
+  --on-primary-fixed: #3b0764;
+  --on-primary-fixed-variant: #581c87;
+
+  --secondary: #059669;
+  --secondary-container: #10b981;
+  --secondary-fixed: #d1fae5;
+  --secondary-fixed-dim: #a7f3d0;
+  --on-secondary: #ffffff;
+  --on-secondary-container: #ffffff;
+  --on-secondary-fixed: #064e3b;
+  --on-secondary-fixed-variant: #065f46;
+
+  --tertiary: #4f46e5;
+  --tertiary-container: #6366f1;
+  --tertiary-fixed: #e0e7ff;
+  --tertiary-fixed-dim: #c7d2fe;
+  --on-tertiary: #ffffff;
+  --on-tertiary-container: #ffffff;
+  --on-tertiary-fixed: #1e1b4b;
+  --on-tertiary-fixed-variant: #312e81;
+
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --outline: #64748b;
+  --outline-variant: #cbd5e1;
+
+  --error: #dc2626;
+  --error-container: #fee2e2;
+  --on-error: #ffffff;
+  --on-error-container: #991b1b;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Material Symbols icon styling */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  font-size: 20px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.material-symbols-outlined[data-weight="fill"] {
+  font-variation-settings: 'FILL' 1;
+}
+
+/* Cyber Reticle L-corners */
+.reticle-corner {
+  position: relative;
+}
+
+.reticle-corner::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--primary);
+  border-left: 2px solid var(--primary);
+  pointer-events: none;
+}
+
+.reticle-corner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
+  pointer-events: none;
+}
+
+/* Custom Cyber Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-container-lowest);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-container-highest);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
