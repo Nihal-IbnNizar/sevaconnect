@@ -323,7 +323,7 @@ export const PORTAL_DATABASE: ServicePortalItem[] = [
     id: 'sevana-pension',
     title: 'Sevana Social Security Pension',
     titleMl: 'സേവന സോഷ്യൽ സെക്യൂരിറ്റി പെൻഷൻ',
-    url: 'https://www.welfarepension.lsgkerala.gov.in/',
+    url: 'https://welfarepension.lsgkerala.gov.in/index.aspx',
     authority: 'LSGD & Finance Department, Kerala',
     authorityMl: 'തദ്ദേശ സ്വയംഭരണ & ധനകാര്യ വകുപ്പ്, കേരളം',
     source: 'state',
