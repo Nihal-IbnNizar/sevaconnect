@@ -43,6 +43,9 @@ export default function SevaConnectPage() {
   // Scroll to Top State
   const [showBackToTop, setShowBackToTop] = useState(false);
 
+  // Sidebar State: open by default
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Initialize Language, Theme and Pinned Favorites on mount
@@ -505,111 +508,185 @@ export default function SevaConnectPage() {
       {/* ========================================================================= */}
       {/* MAIN CONTAINER: CIVIC GOVERNMENT PORTALS MATRIX */}
       {/* ========================================================================= */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Source Segmented Tabs & Category Filter Rail */}
-        <section className="bg-white dark:bg-slate-900/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
-          {/* Top Row: Authority Source Selector */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
-            <div className="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-slate-200">
-              <span className="material-symbols-outlined text-emerald-500 text-[20px]">
-                filter_list
-              </span>
-              <span>{lang === 'ml' ? 'പോർട്ടലുകൾ തിരഞ്ഞെടുക്കുക:' : 'Select Portals:'}</span>
+      <div className="flex-1 flex relative">
+        {/* ===== CATEGORY SIDE PANEL ===== */}
+        {/* Mobile overlay backdrop */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 z-30 bg-slate-950/60 backdrop-blur-sm lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        {/* Side Panel */}
+        <aside
+          className={`fixed lg:sticky top-0 lg:top-[60px] z-30 h-screen lg:h-[calc(100vh-60px)] flex-shrink-0 flex flex-col bg-white dark:bg-[#0f172a] border-r border-slate-200 dark:border-slate-800 transition-all duration-300 ease-in-out overflow-hidden shadow-xl lg:shadow-none ${
+            sidebarOpen ? 'w-64 translate-x-0' : 'w-0 -translate-x-full lg:w-0'
+          }`}
+        >
+          <div className="flex flex-col h-full min-w-64">
+            {/* Sidebar Header */}
+            <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-emerald-500 text-[18px]">category</span>
+                <span className="text-sm font-bold text-slate-800 dark:text-slate-200">
+                  {lang === 'ml' ? 'വിഭാഗങ്ങൾ' : 'Categories'}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSidebarOpen(false)}
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                title={lang === 'ml' ? 'അടയ്ക്കുക' : 'Close panel'}
+              >
+                <span className="material-symbols-outlined text-[18px]">chevron_left</span>
+              </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+            {/* Category List */}
+            <div className="flex-1 overflow-y-auto py-3 px-2 space-y-1">
+              {/* All Categories button */}
               <button
                 type="button"
-                onClick={() => setActiveSource('all')}
-                className={`px-3.5 py-2 rounded-xl transition-all ${
-                  activeSource === 'all'
-                    ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-md font-extrabold'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                onClick={() => { setActiveCategory('all'); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+                className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-bold text-left transition-all ${
+                  activeCategory === 'all'
+                    ? 'bg-slate-800 text-white dark:bg-slate-700 shadow-sm'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
               >
-                {lang === 'ml' ? 'എല്ലാ പോർട്ടലുകളും' : 'All Portals'} ({totalCount})
+                <span className="material-symbols-outlined text-[16px]">apps</span>
+                <span className="flex-1">{lang === 'ml' ? 'എല്ലാ വിഭാഗങ്ങളും' : 'All Categories'}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-bold ${
+                  activeCategory === 'all'
+                    ? 'bg-white/20 text-white'
+                    : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                }`}>{PORTAL_DATABASE.length}</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => setActiveSource('state')}
-                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-                  activeSource === 'state'
-                    ? 'bg-emerald-600 text-white shadow-md font-extrabold'
-                    : 'bg-emerald-50 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 hover:bg-emerald-100 dark:hover:bg-emerald-500/20'
-                }`}
-              >
-                <span>🌴 {lang === 'ml' ? 'കേരള സർക്കാർ' : 'Kerala State'} ({stateCount})</span>
-              </button>
+              {/* Divider */}
+              <div className="h-px bg-slate-100 dark:bg-slate-800 my-2" />
 
-              <button
-                type="button"
-                onClick={() => setActiveSource('central')}
-                className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-                  activeSource === 'central'
-                    ? 'bg-indigo-600 text-white shadow-md font-extrabold'
-                    : 'bg-indigo-50 text-indigo-800 dark:bg-indigo-500/10 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 hover:bg-indigo-100 dark:hover:bg-indigo-500/20'
-                }`}
-              >
-                <span>🇮🇳 {lang === 'ml' ? 'കേന്ദ്ര സർക്കാർ' : 'Central Govt'} ({centralCount})</span>
-              </button>
+              {CATEGORIES_DATA.map((cat) => {
+                const isSelected = activeCategory === cat.key;
+                const count = PORTAL_DATABASE.filter((p) => p.category === cat.key).length;
 
-              {pinnedCount > 0 && (
-                <button
-                  type="button"
-                  onClick={() => setActiveSource('pinned')}
-                  className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
-                    activeSource === 'pinned'
-                      ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
-                      : 'bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-[16px]" data-weight="fill">
-                    star
-                  </span>
-                  <span>{lang === 'ml' ? 'പ്രിയപ്പെട്ടവ' : 'Pinned'} ({pinnedCount})</span>
-                </button>
-              )}
+                return (
+                  <button
+                    key={cat.key}
+                    type="button"
+                    onClick={() => { setActiveCategory(cat.key); if (window.innerWidth < 1024) setSidebarOpen(false); }}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all ${
+                      isSelected
+                        ? 'bg-emerald-600 text-white shadow-sm font-bold'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[16px]">{cat.icon}</span>
+                    <span className="flex-1 leading-snug">{lang === 'ml' ? cat.labelMl : cat.labelEn}</span>
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-bold flex-shrink-0 ${
+                      isSelected
+                        ? 'bg-white/20 text-white'
+                        : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                    }`}>{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Sidebar Footer */}
+            <div className="px-3 py-3 border-t border-slate-100 dark:border-slate-800 flex-shrink-0">
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center">
+                {lang === 'ml' ? `${PORTAL_DATABASE.length} ഔദ്യോഗിക പോർട്ടലുകൾ` : `${PORTAL_DATABASE.length} Official Portals`}
+              </p>
             </div>
           </div>
+        </aside>
 
-          {/* Bottom Row: Category Pills Scrollable */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-            <button
-              type="button"
-              onClick={() => setActiveCategory('all')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex-shrink-0 ${
-                activeCategory === 'all'
-                  ? 'bg-slate-800 text-white dark:bg-slate-700 shadow-xs'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-              }`}
-            >
-              {lang === 'ml' ? 'എല്ലാ വിഭാഗങ്ങളും' : 'All Categories'}
-            </button>
+        {/* Main content area */}
+        <main className={`flex-1 min-w-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 transition-all duration-300`}>
 
-            {CATEGORIES_DATA.map((cat) => {
-              const isSelected = activeCategory === cat.key;
-              const count = PORTAL_DATABASE.filter((p) => p.category === cat.key).length;
-
-              return (
+          {/* Source Segmented Tabs */}
+          <section className="bg-white dark:bg-slate-900/80 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+            {/* Top Row: Authority Source Selector + Sidebar Toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                {/* Sidebar toggle button */}
                 <button
-                  key={cat.key}
                   type="button"
-                  onClick={() => setActiveCategory(cat.key)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 flex-shrink-0 ${
-                    isSelected
-                      ? 'bg-emerald-600 text-white shadow-xs font-bold'
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  className={`p-2 rounded-xl border transition-all flex-shrink-0 ${
+                    sidebarOpen
+                      ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700'
+                  }`}
+                  title={sidebarOpen ? (lang === 'ml' ? 'വിഭാഗ പാനൽ മറയ്ക്കുക' : 'Hide Categories Panel') : (lang === 'ml' ? 'വിഭാഗ പാനൽ കാണിക്കുക' : 'Show Categories Panel')}
+                >
+                  <span className="material-symbols-outlined text-[20px]">menu_open</span>
+                </button>
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-slate-200">
+                  <span className="material-symbols-outlined text-emerald-500 text-[20px]">filter_list</span>
+                  <span>{lang === 'ml' ? 'പോർട്ടലുകൾ തിരഞ്ഞെടുക്കുക:' : 'Select Portals:'}</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+                <button
+                  type="button"
+                  onClick={() => setActiveSource('all')}
+                  className={`px-3.5 py-2 rounded-xl transition-all ${
+                    activeSource === 'all'
+                      ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-950 shadow-md font-extrabold'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
                   }`}
                 >
-                  <span className="material-symbols-outlined text-[16px]">{cat.icon}</span>
-                  <span>{lang === 'ml' ? cat.labelMl : cat.labelEn}</span>
-                  <span className="text-[11px] opacity-75 font-bold">({count})</span>
+                  {lang === 'ml' ? 'എല്ലാ പോർട്ടലുകളും' : 'All Portals'} ({totalCount})
                 </button>
-              );
-            })}
-          </div>
-        </section>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveSource('state')}
+                  className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+                    activeSource === 'state'
+                      ? 'bg-emerald-600 text-white shadow-md font-extrabold'
+                      : 'bg-emerald-50 text-emerald-800 dark:bg-emerald-500/10 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 hover:bg-emerald-100 dark:hover:bg-emerald-500/20'
+                  }`}
+                >
+                  <span>🌴 {lang === 'ml' ? 'കേരള സർക്കാർ' : 'Kerala State'} ({stateCount})</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveSource('central')}
+                  className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+                    activeSource === 'central'
+                      ? 'bg-indigo-600 text-white shadow-md font-extrabold'
+                      : 'bg-indigo-50 text-indigo-800 dark:bg-indigo-500/10 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 hover:bg-indigo-100 dark:hover:bg-indigo-500/20'
+                  }`}
+                >
+                  <span>🇮🇳 {lang === 'ml' ? 'കേന്ദ്ര സർക്കാർ' : 'Central Govt'} ({centralCount})</span>
+                </button>
+
+                {pinnedCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveSource('pinned')}
+                    className={`px-3.5 py-2 rounded-xl transition-all flex items-center gap-1.5 ${
+                      activeSource === 'pinned'
+                        ? 'bg-amber-500 text-slate-950 shadow-md font-extrabold'
+                        : 'bg-amber-50 text-amber-800 dark:bg-amber-500/10 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 hover:bg-amber-100 dark:hover:bg-amber-500/20'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-[16px]" data-weight="fill">
+                      star
+                    </span>
+                    <span>{lang === 'ml' ? 'പ്രിയപ്പെട്ടവ' : 'Pinned'} ({pinnedCount})</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </section>
+
 
         {/* Results Counter & Active Filter Reset Bar */}
         {(activeSource !== 'all' || activeCategory !== 'all' || searchQuery) && (
@@ -917,7 +994,8 @@ export default function SevaConnectPage() {
             ))}
           </div>
         </section>
-      </main>
+        </main>
+      </div>
 
       {/* ========================================================================= */}
       {/* SLIDE-OVER DETAIL MODAL / REQUIREMENTS DRAWER */}
