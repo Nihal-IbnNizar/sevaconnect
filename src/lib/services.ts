@@ -5,7 +5,11 @@ export type ServiceCategory =
   | 'Vehicles & Transport'
   | 'Identity & Aadhaar'
   | 'Welfare & Pension'
-  | 'Local Bodies & Municipalities';
+  | 'Local Bodies & Municipalities'
+  | 'Health & Medical'
+  | 'Bills & Utilities'
+  | 'Housing & Land Schemes'
+  | 'Travel & Booking';
 
 export type ServiceType = 'state' | 'central' | 'utility';
 
@@ -56,6 +60,10 @@ export const CATEGORIES_DATA: { key: ServiceCategory; labelEn: string; labelMl: 
   { key: 'Identity & Aadhaar', labelEn: 'Identity & Aadhaar', labelMl: 'ആധാർ & തിരിച്ചറിയൽ', icon: 'badge' },
   { key: 'Welfare & Pension', labelEn: 'Welfare & Pension', labelMl: 'പെൻഷൻ & ക്ഷേമം', icon: 'volunteer_activism' },
   { key: 'Local Bodies & Municipalities', labelEn: 'Panchayat & K-Smart', labelMl: 'പഞ്ചായത്ത് & K-Smart', icon: 'apartment' },
+  { key: 'Health & Medical', labelEn: 'Health & Medical', labelMl: 'ആരോഗ്യം & ചികിത്സ', icon: 'local_hospital' },
+  { key: 'Bills & Utilities', labelEn: 'Bills & Utilities', labelMl: 'ബില്ലുകൾ & യൂട്ടിലിറ്റി', icon: 'electric_bolt' },
+  { key: 'Housing & Land Schemes', labelEn: 'Housing & Land Schemes', labelMl: 'ഭവന & ഭൂ പദ്ധതികൾ', icon: 'home_work' },
+  { key: 'Travel & Booking', labelEn: 'Travel & Booking', labelMl: 'യാത്ര & ടിക്കറ്റ് ബുക്കിംഗ്', icon: 'flight' },
 ];
 
 export const PORTAL_DATABASE: ServicePortalItem[] = [
@@ -459,7 +467,7 @@ export const PORTAL_DATABASE: ServicePortalItem[] = [
     authority: 'Health & Family Welfare Dept, Kerala',
     authorityMl: 'ആരോഗ്യ വകുപ്പ്, കേരളം',
     source: 'state',
-    category: 'Welfare & Pension',
+    category: 'Health & Medical',
     pinned: false,
     iconName: 'local_hospital',
     iconBg: 'bg-red-600 text-white',
@@ -586,6 +594,402 @@ export const PORTAL_DATABASE: ServicePortalItem[] = [
     feeMl: 'സാധാരണ സൗജന്യം / PCC യ്ക്ക് ₹500',
     sla: '3 - 7 Days for PCC',
     slaMl: '3 മുതൽ 7 ദിവസത്തിനകം'
+  },
+  {
+    id: 'kseb-bill',
+    title: 'KSEB Self Service Portal',
+    titleMl: 'കെ.എസ്.ഇ.ബി ഓൺലൈൻ സേവനങ്ങൾ',
+    url: 'https://wss.kseb.in/selfservices/',
+    authority: 'Kerala State Electricity Board (KSEB)',
+    authorityMl: 'കേരള സ്റ്റേറ്റ് ഇലക്ട്രിസിറ്റി ബോർഡ്',
+    source: 'state',
+    category: 'Bills & Utilities',
+    pinned: false,
+    iconName: 'electric_bolt',
+    iconBg: 'bg-yellow-500 text-slate-900',
+    description: 'Pay electricity bills online, view consumption history, apply for new connection, report power outages, and download payment receipts.',
+    descriptionMl: 'ഓൺലൈനായി വൈദ്യുതി ബിൽ അടയ്ക്കുക, ബിൽ ചരിത്രം കാണുക, പുതിയ കണക്ഷന് അപേക്ഷിക്കുക, ഔദ്യോഗിക ടിക്കറ്റ് ഓൺലൈൻ ആക്കൽ.',
+    services: [
+      'Online electricity bill payment',
+      'View and download bill history',
+      'New electricity connection application',
+      'Report power outage or fault',
+      'Name change and connection transfer'
+    ],
+    servicesMl: [
+      'ഓൺലൈൻ ഇലക്ട്രിസിറ്റി ബിൽ അടയ്ക്കൽ',
+      'ബിൽ ചരിത്രം കാണുക & ഡൗൺലോഡ്',
+      'പുതിയ കണക്ഷൻ അപേക്ഷ',
+      'പവർ ഔട്ടേജ് അറിയിക്കൽ',
+      'പേര് മാറ്റൽ & ട്രാൻസ്ഫർ'
+    ],
+    docs: ['Consumer Number', 'Aadhaar Card', 'Latest Electricity Bill'],
+    docsMl: ['ഉപഭോക്തൃ നമ്പർ', 'ആധാർ കാർഡ്', 'പുതിയ വൈദ്യുതി ബിൽ'],
+    tags: ['kseb', 'electricity bill', 'power bill', 'light bill', 'വൈദ്യുതി ബിൽ', 'കെ.എസ്.ഇ.ബി'],
+    fee: 'Actual Bill Amount',
+    feeMl: 'ബിൽ തുകയ്ക്ക് അനുസരിച്ച്',
+    sla: 'Instant Payment Confirmation',
+    slaMl: 'തൽക്ഷണം പേയ്‌മെന്റ് ഉറപ്പ്'
+  },
+  {
+    id: 'kwa-water-bill',
+    title: 'KWA Water Bill Online Payment',
+    titleMl: 'കേരള വാട്ടർ അതോറിറ്റി ബിൽ',
+    url: 'https://epay.kwa.kerala.gov.in/quickpay',
+    authority: 'Kerala Water Authority (KWA)',
+    authorityMl: 'കേരള വാട്ടർ അതോറിറ്റി',
+    source: 'state',
+    category: 'Bills & Utilities',
+    pinned: false,
+    iconName: 'water_drop',
+    iconBg: 'bg-blue-500 text-white',
+    description: 'Pay KWA water bills online, check dues, apply for new water connection, and lodge complaints for water supply issues.',
+    descriptionMl: 'KWA വെള്ളം ബിൽ ഓൺലൈനായി അടയ്ക്കുക, കുടിശ്ശിക പരിശോധിക്കുക, പുതിയ കണക്ഷൻ അപേക്ഷ നൽകുക.',
+    services: [
+      'Online KWA water bill payment',
+      'Check bill dues and arrears',
+      'Apply for new water connection',
+      'Lodge complaint for water supply issues',
+      'Download payment receipt'
+    ],
+    servicesMl: [
+      'ഓൺലൈൻ KWA ജലബിൽ അടയ്ക്കൽ',
+      'കുടിശ്ശിക & ബില്ലുകൾ പരിശോധിക്കൽ',
+      'പുതിയ വെള്ളം കണക്ഷൻ അപേക്ഷ',
+      'ജല വിതരണ പ്രശ്നം റിപ്പോർട്ട് ചെയ്യുക',
+      'രസീത് ഡൗൺലോഡ് ചെയ്യൽ'
+    ],
+    docs: ['Consumer ID / Connection Number', 'Aadhaar Card'],
+    docsMl: ['ഉപഭോക്തൃ ID / കണക്ഷൻ നമ്പർ', 'ആധാർ കാർഡ്'],
+    tags: ['kwa', 'water bill', 'kerala water authority', 'water connection', 'ജലബിൽ', 'KWA'],
+    fee: 'Actual Bill Amount',
+    feeMl: 'ബിൽ തുകയ്ക്ക് അനുസരിച്ച്',
+    sla: 'Instant Payment',
+    slaMl: 'തൽക്ഷണം'
+  },
+  {
+    id: 'life-mission',
+    title: 'LIFE Mission Housing Portal',
+    titleMl: 'ലൈഫ് മിഷൻ ഭവന പദ്ധതി',
+    url: 'https://lifemission.kerala.gov.in/',
+    authority: 'LIFE Mission, Kerala Government',
+    authorityMl: 'ലൈഫ് മിഷൻ, കേരള സർക്കാർ',
+    source: 'state',
+    category: 'Housing & Land Schemes',
+    pinned: false,
+    iconName: 'home_work',
+    iconBg: 'bg-orange-600 text-white',
+    description: 'Apply for LIFE Mission housing scheme for homeless and landless families. Check application status and beneficiary verification.',
+    descriptionMl: 'ഭൂരഹിത ഭവനരഹിത കുടുംബങ്ങൾക്കുള്ള ലൈഫ് മിഷൻ ഭവന പദ്ധതി അപേക്ഷ, ബെനഫിഷ്യറി സ്ഥിരീകരണം, സ്റ്റാറ്റസ് പരിശോധന.',
+    services: [
+      'Housing scheme application for landless and homeless',
+      'Beneficiary status verification',
+      'Check application and allotment status',
+      'Upload required documents',
+      'Grievance redressal'
+    ],
+    servicesMl: [
+      'ഭൂരഹിത ഭവനരഹിത അപേക്ഷ',
+      'ബെനഫിഷ്യറി സ്ഥിരീകരണം',
+      'അലോട്ട്‌മെന്റ് & അപേക്ഷ സ്റ്റാറ്റസ്',
+      'ആവശ്യമായ രേഖകൾ അപ്‌ലോഡ്',
+      'പരാതി പരിഹാരം'
+    ],
+    docs: ['Aadhaar Card', 'Ration Card', 'Income Certificate', 'Proof of Landlessness'],
+    docsMl: ['ആധാർ കാർഡ്', 'റേഷൻ കാർഡ്', 'വരുമാന സർട്ടിഫിക്കറ്റ്', 'ഭൂരഹിത തെളിവ്'],
+    tags: ['life mission', 'housing scheme', 'home kerala', 'landless', 'homeless', 'ഭവന പദ്ധതി', 'ലൈഫ് മിഷൻ'],
+    fee: '₹0 (Government Scheme)',
+    feeMl: 'സൗജന്യം (സർക്കാർ പദ്ധതി)',
+    sla: 'As per scheme cycle',
+    slaMl: 'പദ്ധതി ചക്രം അനുസരിച്ച്'
+  },
+  {
+    id: 'ente-bhoomi',
+    title: 'Ente Bhoomi – Digital Land Records',
+    titleMl: 'എന്റെ ഭൂമി – ഡിജിറ്റൽ ഭൂ രേഖകൾ',
+    url: 'https://entebhoomi.kerala.gov.in/',
+    authority: 'Revenue Department, Kerala',
+    authorityMl: 'റവന്യൂ വകുപ്പ്, കേരളം',
+    source: 'state',
+    category: 'Housing & Land Schemes',
+    pinned: false,
+    iconName: 'map',
+    iconBg: 'bg-lime-700 text-white',
+    description: 'Integrated digital land records system. View Thandapper, Pattayam, village map, ownership details, and land use history digitally.',
+    descriptionMl: 'ഇന്റഗ്രേറ്റഡ് ഡിജിറ്റൽ ഭൂ രേഖ സിസ്റ്റം. തണ്ടപ്പേർ, പട്ടയം, വില്ലേജ് മാപ്പ്, ഉടമസ്ഥാവകാശ വിശദാംശങ്ങൾ ഡിജിറ്റലായി കാണാം.',
+    services: [
+      'View Thandapper and ownership details online',
+      'Access Pattayam (land title deed)',
+      'Village map and survey sketch',
+      'Land mutation (Pokkuvaravu) history',
+      'Land use and extent details'
+    ],
+    servicesMl: [
+      'തണ്ടപ്പേർ & ഉടമസ്ഥ വിവരങ്ങൾ ഓൺലൈനായി കാണുക',
+      'പട്ടയം (ഭൂ ഉടമ) ആക്സസ്',
+      'വില്ലേജ് മാപ്പ്, സർവേ സ്കെച്ച്',
+      'ഭൂ പരിവർത്തന (പോക്കുവരവ്) ചരിത്രം',
+      'ഭൂമിയുടെ വ്യാപ്തി & ഉപയോഗ വിവരങ്ങൾ'
+    ],
+    docs: ['Survey Number / Thandapper Number', 'Aadhaar / Mobile OTP'],
+    docsMl: ['സർവേ നമ്പർ / തണ്ടപ്പേർ നമ്പർ', 'ആധാർ / മൊബൈൽ OTP'],
+    tags: ['ente bhoomi', 'land records', 'thandaper', 'pattayam', 'village map', 'ഭൂ രേഖ', 'എന്റെ ഭൂമി', 'പട്ടയം'],
+    fee: '₹0 (Free Citizen Service)',
+    feeMl: 'സൗജന്യം (₹0)',
+    sla: 'Instant Digital Access',
+    slaMl: 'തൽക്ഷണം ഡിജിറ്റൽ ആക്സസ്'
+  },
+  {
+    id: 'aims-kerala',
+    title: 'AIMS Kerala – Farmer & Crop Insurance',
+    titleMl: 'AIMS കേരള – കർഷക & വിള ഇൻഷുറൻസ്',
+    url: 'https://aims.kerala.gov.in/',
+    authority: 'Agriculture Department, Kerala',
+    authorityMl: 'കൃഷി വകുപ്പ്, കേരളം',
+    source: 'state',
+    category: 'Welfare & Pension',
+    pinned: false,
+    iconName: 'agriculture',
+    iconBg: 'bg-green-700 text-white',
+    description: 'Apply for crop insurance, farmer crop loss compensation, and state agriculture welfare schemes under AIMS Kerala portal.',
+    descriptionMl: 'AIMS കേരള പോർട്ടലിൽ കൃഷി ഇൻഷുറൻസ്, വിള നഷ്ടപരിഹാരം, കർഷക ക്ഷേമ പദ്ധതികൾ എന്നിവ ലഭ്യമാണ്.',
+    services: [
+      'Crop insurance scheme application',
+      'Farmer crop loss compensation claim',
+      'State welfare scheme for farmers',
+      'Subsidy and benefit status check',
+      'Agriculture department scheme enrollment'
+    ],
+    servicesMl: [
+      'കൃഷി ഇൻഷുറൻസ് അപേക്ഷ',
+      'വിള നഷ്ടപരിഹാര ക്ലെയിം',
+      'കർഷക ക്ഷേമ പദ്ധതി',
+      'സബ്‌സിഡി & ആനുകൂല്യ സ്റ്റാറ്റസ്',
+      'കൃഷി ഒഫ്ഫീസ് പദ്ധതി എൻറോൾ'
+    ],
+    docs: ['Aadhaar Card', 'Land Tax Receipt', 'Bank Account Passbook', 'Crop details'],
+    docsMl: ['ആധാർ കാർഡ്', 'ഭൂ നികുതി രസീത്', 'ബാങ്ക് പാസ്ബുക്ക്', 'കൃഷി വിശദാംശം'],
+    tags: ['aims kerala', 'crop insurance', 'farmer compensation', 'agriculture', 'കൃഷി', 'വിള ഇൻഷുറൻസ്', 'AIMS'],
+    fee: '₹0 (Scheme Based)',
+    feeMl: 'സൗജന്യം (പദ്ധതി അനുസരിച്ച്)',
+    sla: 'As per claim processing',
+    slaMl: 'ക്ലെയിം പ്രോസസ് അനുസരിച്ച്'
+  },
+  {
+    id: 'norka-roots',
+    title: 'NORKA Roots – Pravasi Welfare',
+    titleMl: 'നോർക്ക റൂട്ട്സ് – പ്രവാസി ക്ഷേമം',
+    url: 'https://norkaroots.kerala.gov.in/',
+    authority: 'NORKA Department, Kerala Government',
+    authorityMl: 'നോർക്ക വകുപ്പ്, കേരള സർക്കാർ',
+    source: 'state',
+    category: 'Welfare & Pension',
+    pinned: false,
+    iconName: 'travel_explore',
+    iconBg: 'bg-sky-700 text-white',
+    description: 'Pravasi (NRI) welfare schemes, document attestation services, returnee assistance, skill development, and registration for Keralites abroad.',
+    descriptionMl: 'NRI / പ്രവാസി ക്ഷേമ പദ്ധതികൾ, ആസ്ഥിക അറ്റൈറ്റ്‌മന്റ്, തൊഴിൽ സഹായം, നോർക്ക ഡേറ്റ ബേസ് രജിസ്ട്രേഷൻ.',
+    services: [
+      'NRI / Pravasi welfare scheme registration',
+      'Document attestation for abroad',
+      'Returnee assistance and reintegration',
+      'Skill development for returnees',
+      'Emergency distress fund application'
+    ],
+    servicesMl: [
+      'NRI / പ്രവാസി ക്ഷേമ രജിസ്ട്രേഷൻ',
+      'വിദേശ ജോലിക്ക് രേഖ സ്ഥിരീകരണം',
+      'തിരിച്ചു വന്ന പ്രവാസി സഹായം',
+      'പ്രവാസി ഉദ്യോഗ-സ്ഥിരം ഫണ്ട്',
+      'ഡിസ്ട്രസ് ഫണ്ട് അപേക്ഷ'
+    ],
+    docs: ['Aadhaar Card', 'Passport', 'Employment/Visa Documents'],
+    docsMl: ['ആധാർ കാർഡ്', 'പാസ്‌പോർട്ട്', 'ജോലി / വിസ രേഖകൾ'],
+    tags: ['norka', 'pravasi', 'nri', 'gulf', 'attestation', 'returnee', 'നോർക്ക', 'പ്രവാസി', 'ഗൾഫ്'],
+    fee: 'Varies by service',
+    feeMl: 'സേവനം അനുസരിച്ച്',
+    sla: 'Varies by scheme',
+    slaMl: 'പദ്ധതി അനുസരിച്ച്'
+  },
+  {
+    id: 'egrantz-kerala',
+    title: 'e-Grantz Kerala – SC/ST/OBC Scholarships',
+    titleMl: 'ഇ-ഗ്രാന്റ്സ് – SC/ST/OBC സ്കോളർഷിപ്പ്',
+    url: 'https://egrantz.kerala.gov.in/',
+    authority: 'SC/ST Development Department, Kerala',
+    authorityMl: 'SC/ST വികസന വകുപ്പ്, കേരളം',
+    source: 'state',
+    category: 'Welfare & Pension',
+    pinned: false,
+    iconName: 'military_tech',
+    iconBg: 'bg-violet-700 text-white',
+    description: 'State portal for educational scholarships, grants, and financial assistance for SC, ST, and OBC students in Kerala.',
+    descriptionMl: 'SC, ST, OBC വിദ്യാർത്ഥികൾക്കുള്ള കേരള സർക്കാർ വിദ്യാഭ്യാസ സ്കോളർഷിപ്പ്, ഗ്രാന്റ്, സഹായ ഫണ്ടുകൾ.',
+    services: [
+      'Pre-matric and post-matric scholarship application',
+      'Fresh and renewal scholarship registration',
+      'Track scholarship disbursement status',
+      'Hostel and book grant application',
+      'Grievance filing for scholarship issues'
+    ],
+    servicesMl: [
+      'പ്രീ-മെട്രിക്, പോസ്റ്റ്-മെട്രിക് സ്കോളർഷിപ്പ്',
+      'പുതിയ & റിന്യൂ അപേക്ഷ',
+      'സ്കോളർഷിപ്പ് ഡിസ്‌ബേഴ്‌സ്‌മെന്റ് ട്രാക്ക്',
+      'ഹോസ്റ്റൽ & ബുക്ക് ഗ്രാന്റ്',
+      'പരാതി'
+    ],
+    docs: ['Aadhaar', 'Caste Certificate (SC/ST/OBC)', 'Income Certificate', 'Bank Passbook', 'Marksheets'],
+    docsMl: ['ആധാർ', 'ജാതി സർട്ടിഫിക്കറ്റ് (SC/ST/OBC)', 'വരുമാന സർട്ടിഫിക്കറ്റ്', 'ബാങ്ക് പാസ്ബുക്ക്', 'മാർക്ക് ലിസ്റ്റ്'],
+    tags: ['egrantz', 'sc st scholarship', 'obc scholarship', 'kerala scholarship', 'ഇ-ഗ്രാന്റ്സ്', 'SC ST സ്കോളർഷിപ്പ്'],
+    fee: '₹0 (Free Citizen Benefit)',
+    feeMl: 'സൗജന്യം (₹0)',
+    sla: 'Academic Cycle / Direct Transfer',
+    slaMl: 'ബാങ്ക് ഡയറക്ട് ട്രാൻസ്ഫർ'
+  },
+  {
+    id: 'employment-exchange',
+    title: 'Kerala Employment Exchange',
+    titleMl: 'കേരള എംപ്ലോയ്‌മെന്റ് എക്‌സ്‌ചേഞ്ച്',
+    url: 'https://employment.kerala.gov.in/',
+    authority: 'Employment Department, Kerala',
+    authorityMl: 'തൊഴിൽ വകുപ്പ്, കേരളം',
+    source: 'state',
+    category: 'Employment & PSC',
+    pinned: false,
+    iconName: 'work',
+    iconBg: 'bg-teal-700 text-white',
+    description: 'Register as a job seeker at Kerala Employment Exchange, renew registration, search job vacancies, and apply for employment card.',
+    descriptionMl: 'കേരള എംപ്ലോയ്‌മെന്റ് എക്‌സ്‌ചേഞ്ചിൽ ജോബ്‌സീക്കർ ആയി രജിസ്ട്രേഷൻ, റിന്യൂ, ഒഴിവുകൾ കാണൽ, ജോലി അടക്കമുള്ള ഓൺലൈൻ സേവനങ്ങൾ.',
+    services: [
+      'New job seeker registration',
+      'Renewal of employment registration',
+      'Search and apply for job vacancies',
+      'Employment card download',
+      'Skills registration'
+    ],
+    servicesMl: [
+      'ജോബ്‌സീക്കർ പുതിയ രജിസ്ട്രേഷൻ',
+      'എംപ്ലോയ്‌മെന്റ് രജിസ്ട്രേഷൻ റിന്യൂ',
+      'ഒഴിവ് കാണൽ & അപേക്ഷ',
+      'ജോലി കാർഡ് ഡൗൺലോഡ്',
+      'സ്‌കിൽ രജിസ്ട്രേഷൻ'
+    ],
+    docs: ['Aadhaar Card', 'Educational Certificates', 'Passport Photo', 'Community Certificate (if applicable)'],
+    docsMl: ['ആധാർ കാർഡ്', 'വിദ്യഭ്യാസ സർട്ടിഫിക്കറ്റ്', 'ഫോട്ടോ', 'സമുദായ സർട്ടിഫിക്കറ്റ്'],
+    tags: ['employment exchange', 'job seeker', 'job registration', 'employment card', 'തൊഴിൽ', 'ജോബ് സീക്കർ'],
+    fee: '₹0 (Free Registration)',
+    feeMl: 'സൗജന്യം (₹0)',
+    sla: 'Instant Registration',
+    slaMl: 'തൽക്ഷണം രജിസ്ട്രേഷൻ'
+  },
+  {
+    id: 'ssc-recruitment',
+    title: 'SSC & UPSC Central Recruitment',
+    titleMl: 'SSC & UPSC കേന്ദ്ര റിക്രൂട്ട്‌മെന്റ്',
+    url: 'https://ssc.gov.in/',
+    authority: 'Staff Selection Commission / UPSC, Govt of India',
+    authorityMl: 'കേന്ദ്ര ജീവനക്കാർ തെരഞ്ഞെടുക്കൽ കമ്മീഷൻ / UPSC',
+    source: 'central',
+    category: 'Employment & PSC',
+    pinned: false,
+    iconName: 'account_balance',
+    iconBg: 'bg-indigo-800 text-white',
+    description: 'Apply for central government recruitment exams via SSC (ssc.gov.in) for Group B/C posts and UPSC (upsconline.nic.in) for IAS/IPS/IFS civil services.',
+    descriptionMl: 'SSC വഴി കേന്ദ്ര ഗ്രൂപ്പ് B/C ജോലികൾക്കും, UPSC വഴി IAS, IPS, IFS, ഇന്ത്യൻ സിവിൽ സർവീസസ് പരീക്ഷകൾക്കും ഓൺലൈൻ അപേക്ഷ.',
+    services: [
+      'SSC CGL, CHSL, MTS online application',
+      'UPSC Civil Services (IAS/IPS/IFS) application',
+      'Download admit card for central exams',
+      'Check result and cut-off lists',
+      'UPSC NDA, CDS, CAPF applications'
+    ],
+    servicesMl: [
+      'SSC CGL, CHSL, MTS ഓൺലൈൻ അപേക്ഷ',
+      'UPSC IAS, IPS, IFS പരീക്ഷ അപേക്ഷ',
+      'കേന്ദ്ര പരീക്ഷ അഡ്മിറ്റ് കാർഡ്',
+      'ഫലം & കട്ട് ഓഫ് ലിസ്റ്റ്',
+      'NDA, CDS, CAPF അപേക്ഷ'
+    ],
+    docs: ['Aadhaar Card', 'Educational Certificates (10th, 12th, Graduation)', 'Passport Photo', 'Signature'],
+    docsMl: ['ആധാർ കാർഡ്', 'വിദ്യഭ്യാസ സർട്ടിഫിക്കറ്റ്', 'ഫോട്ടോ', 'ഒപ്പ്'],
+    tags: ['ssc', 'upsc', 'central recruitment', 'ias', 'civil services', 'cgl', 'chsl', 'SSC', 'UPSC'],
+    fee: '₹100 - ₹200 (Category-wise exemptions)',
+    feeMl: '₹100 - ₹200 (SC/ST/Women സൗജന്യം)',
+    sla: 'As per exam calendar',
+    slaMl: 'പരീക്ഷ ക്യാലണ്ടർ അനുസരിച്ച്'
+  },
+  {
+    id: 'ayushman-bharat',
+    title: 'Ayushman Bharat / PM-JAY Health Card',
+    titleMl: 'ആയുഷ്‌മാൻ ഭാരത് / ABHA ഹെൽത്ത് കാർഡ്',
+    url: 'https://setu.pmjay.gov.in/',
+    authority: 'National Health Authority, Govt of India',
+    authorityMl: 'ദേശീയ ആരോഗ്യ അതോറിറ്റി, കേന്ദ്ര സർക്കാർ',
+    source: 'central',
+    category: 'Health & Medical',
+    pinned: false,
+    iconName: 'health_and_safety',
+    iconBg: 'bg-red-700 text-white',
+    description: 'Create ABHA (Ayushman Bharat Health Account) Health ID, download PM-JAY Golden Card, and check eligibility for ₹5 lakh cashless treatment.',
+    descriptionMl: 'ABHA ഹെൽത്ത് ID സൃഷ്ടിക്കൽ, PM-JAY ഗോൾഡൻ കാർഡ് ഡൗൺലോഡ്, ₹5 ലക്ഷം ക്യാഷ്‌ലെസ് ചികിത്സ യോഗ്യത പരിശോധന.',
+    services: [
+      'Create ABHA Health ID (14-digit Health Account)',
+      'Download PM-JAY Golden Card for cashless treatment',
+      'Check eligibility for Ayushman Bharat scheme',
+      'Find empanelled hospitals near you',
+      'Check claim and treatment history'
+    ],
+    servicesMl: [
+      'ABHA ഹെൽത്ത് ID (14 ഡിജിറ്റ്) സൃഷ്ടിക്കൽ',
+      'PM-JAY ഗോൾഡൻ കാർഡ് ഡൗൺലോഡ്',
+      'ആയുഷ്‌മാൻ ഭാരത് യോഗ്യത പരിശോധന',
+      'അടുത്തുള്ള ആശുപത്രി കണ്ടെത്തൽ',
+      'ക്ലെയിം ചരിത്രം'
+    ],
+    docs: ['Aadhaar Card', 'Ration Card', 'Mobile Phone for OTP'],
+    docsMl: ['ആധാർ കാർഡ്', 'റേഷൻ കാർഡ്', 'മൊബൈൽ ഫോൺ'],
+    tags: ['ayushman bharat', 'pmjay', 'abha', 'health card', 'golden card', 'cashless treatment', 'ആയുഷ്‌മാൻ', 'ഗോൾഡൻ കാർഡ്'],
+    fee: '₹0 (Free Govt Health Scheme)',
+    feeMl: 'സൗജന്യം (₹0)',
+    sla: 'Instant ABHA ID / Card Download',
+    slaMl: 'തൽക്ഷണം ABHA ID / കാർഡ്'
+  },
+  {
+    id: 'flight-booking',
+    title: 'Flight & Bus Ticket Booking',
+    titleMl: 'ഫ്ലൈറ്റ് & ബസ് ടിക്കറ്റ് ബുക്കിംഗ്',
+    url: 'https://www.makemytrip.com/',
+    authority: 'MakeMyTrip / RedBus / KSRTC',
+    authorityMl: 'മേക്ക്‌മൈ ട്രിപ്പ് / റെഡ്‌ബസ് / KSRTC',
+    source: 'central',
+    category: 'Travel & Booking',
+    pinned: false,
+    iconName: 'flight',
+    iconBg: 'bg-blue-700 text-white',
+    description: 'Book domestic and international flight tickets on MakeMyTrip, Goibibo, or Cleartrip. Book bus tickets via RedBus or KSRTC online for Kerala routes.',
+    descriptionMl: 'MakeMyTrip, Goibibo, Cleartrip-ൽ ഫ്ലൈറ്റ് ടിക്കറ്റ് ബുക്ക് ചെയ്യുക. RedBus, KSRTC ഓൺലൈൻ ബസ് ടിക്കറ്റ് ബുക്ക് ചെയ്യൽ.',
+    services: [
+      'Domestic & International flight booking (MakeMyTrip)',
+      'Bus ticket booking via RedBus',
+      'KSRTC Kerala bus online booking',
+      'Flight comparison on Goibibo & Cleartrip',
+      'Train tickets via IRCTC'
+    ],
+    servicesMl: [
+      'ഡൊമസ്റ്റിക് & ഇന്റർനാഷണൽ ഫ്ലൈറ്റ് ബുക്കിംഗ്',
+      'RedBus ഓൺലൈൻ ബസ് ടിക്കറ്റ്',
+      'KSRTC കേരള ബസ് ബുക്കിംഗ്',
+      'Goibibo & Cleartrip ഫ്ലൈറ്റ് കോംപേർ',
+      'IRCTC ട്രെയിൻ ടിക്കറ്റ്'
+    ],
+    docs: ['Government Photo ID (for boarding)', 'Mobile Number', 'UPI / Debit / Credit Card'],
+    docsMl: ['ഫോട്ടോ ഐഡി (ബോർഡിംഗിന്)', 'മൊബൈൽ നമ്പർ', 'UPI / ഡെബിറ്റ് കാർഡ്'],
+    tags: ['flight booking', 'bus ticket', 'ksrtc', 'redbus', 'makemytrip', 'goibibo', 'cleartrip', 'irctc', 'ഫ്ലൈറ്റ്', 'ബസ് ടിക്കറ്റ്'],
+    fee: 'Fare + convenience fee',
+    feeMl: 'ടിക്കറ്റ് തുക + സർവ്വീസ് ചാർജ്',
+    sla: 'Instant Confirmation',
+    slaMl: 'തൽക്ഷണം ടിക്കറ്റ് ലഭിക്കും'
   }
 ];
 
