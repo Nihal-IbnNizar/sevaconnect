@@ -651,16 +651,16 @@ export const UTILITY_TOOLS: UtilityItem[] = [
     specs: ['Multi-page PDF', 'Drag & Drop', 'Instant']
   },
   {
-    id: 'tool-passport-photo-maker',
-    title: 'Passport Size Photo Maker',
-    titleMl: 'പാസ്‌പോർട്ട് സൈസ് ഫോട്ടോ മേക്കർ',
-    description: 'Crop standard 35x45mm passport photos with crisp white or blue background for applications.',
-    descriptionMl: 'വെള്ളയോ നീലയോ പശ്ചാത്തലത്തിൽ 35x45mm പാസ്‌പോർട്ട് സൈസ് ഫോട്ടോ തയ്യാറാക്കാൻ.',
-    url: 'https://www.cutout.pro/passport-photo-maker',
-    icon: 'portrait',
-    badge: '35x45 mm Standard',
-    badgeMl: 'പാസ്‌പോർട്ട് സൈസ്',
-    specs: ['35x45 mm', 'White Background', 'Print Template']
+    id: 'tool-image-background-remover',
+    title: 'Image Background Remover',
+    titleMl: 'ഇമേജ് ബാക്ക്ഗ്രൗണ്ട് റിമൂവർ',
+    description: 'Remove backgrounds from images quickly and create clean, transparent backgrounds for photos and designs.',
+    descriptionMl: 'ഫോട്ടോകളിൽ നിന്നും ചിത്രങ്ങളിൽ നിന്നും പശ്ചാത്തലം എളുപ്പത്തിൽ നീക്കം ചെയ്ത് സുതാര്യമായ പശ്ചാത്തലമുള്ള ചിത്രങ്ങൾ തയ്യാറാക്കാം.',
+    url: 'https://www.iloveimg.com/remove-background',
+    icon: 'image',
+    badge: 'AI Background Removal',
+    badgeMl: 'ബാക്ക്ഗ്രൗണ്ട് റിമൂവർ',
+    specs: ['Background Removal', 'Transparent Background', 'Easy to Use']
   },
   {
     id: 'tool-doc-scanner',
